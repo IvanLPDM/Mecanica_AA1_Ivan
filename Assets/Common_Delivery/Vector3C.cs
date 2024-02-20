@@ -73,7 +73,7 @@ public struct Vector3C
 
     public static Vector3C operator *(Vector3C a, Vector3C b)
     {
-        return new Vector3C(0,0,0);
+        return new Vector3C(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
     }
 
     public static Vector3C operator /(Vector3C a, float b)
@@ -113,6 +113,7 @@ public struct Vector3C
 
         return new Vector3C(newX, newY, newZ);
     }
+
     public float Magnitude(float x, float y, float z)
     {
         return (float)Math.Sqrt(x*x + y*y + z*z);
@@ -132,13 +133,14 @@ public struct Vector3C
     #endregion
 
     #region FUNCTIONS
-    public static float Dot(Vector3C v1, Vector3C v2)
+    public static float Dot(Vector3C v1, Vector3C v2, float angulo) //Producto escalar
     {
-        return v1.x*v2.x+v1.y*v2.y+v1.z*v2.z;
+        return v1.magnitude * v2.magnitude * (float)Math.Cos(angulo);
     }
-    public static Vector3C Cross(Vector3C v1, Vector3C v2)
+
+    public static Vector3C Cross(Vector3C v1, Vector3C v2) //Vector normal o perpendicular
     {
-        return new Vector3C();
+        return new Vector3C(v1.y * v2.z - v1.z * v2.y, v1.z * v2.x - v1.x * v2.z, v1.x * v2.y - v1.y *v2.x);
     }
     #endregion
 

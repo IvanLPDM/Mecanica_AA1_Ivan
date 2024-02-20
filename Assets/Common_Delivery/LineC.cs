@@ -23,6 +23,10 @@ public struct LineC
     #endregion
 
     #region METHODS
+    public void NearestPointToPoint()
+    {
+        
+    }
     #endregion
 
     #region FUNCTIONS
