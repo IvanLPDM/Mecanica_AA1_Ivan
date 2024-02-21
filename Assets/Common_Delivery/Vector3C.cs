@@ -129,18 +129,58 @@ public struct Vector3C
         return false; //nptr
     }
 
+    public static float AngleBetween(Vector3C v1, Vector3C v2)
+    {
+        // Calcula el producto punto entre los dos vectores
+        float dotProduct = Dot(v1, v2);
+
+        // Calcula las magnitudes de los vectores
+        float magnitude1 = v1.magnitude;
+        float magnitude2 = v2.magnitude;
+
+        // Calcula el coseno del ángulo entre los vectores
+        float cosAngle = dotProduct / (magnitude1 * magnitude2);
+
+        // Usa la función arcocoseno para obtener el ángulo en radianes
+        float angleInRadians = (float)Math.Acos(cosAngle);
+
+        // Convierte el ángulo a grados si es necesario
+        float angleInDegrees = angleInRadians * (180.0f / (float)Math.PI);
+
+        return angleInDegrees;
+    }
+
 
     #endregion
 
     #region FUNCTIONS
-    public static float Dot(Vector3C v1, Vector3C v2, float angulo) //Producto escalar
+    public static float Dot(Vector3C v1, Vector3C v2) //Producto escalar
     {
+        //calcular angulo
+        float angulo = AngleBetween(v1, v2);
         return v1.magnitude * v2.magnitude * (float)Math.Cos(angulo);
     }
 
     public static Vector3C Cross(Vector3C v1, Vector3C v2) //Vector normal o perpendicular
     {
         return new Vector3C(v1.y * v2.z - v1.z * v2.y, v1.z * v2.x - v1.x * v2.z, v1.x * v2.y - v1.y *v2.x);
+    }
+    public static float Distance(Vector3C point1, Vector3C point2) //Calcula la distancia entre 2 vectores
+    {
+            float dx = point2.x - point1.x;
+            float dy = point2.y - point1.y;
+            float dz = point2.z - point1.z;
+
+            return (float)Math.Sqrt(dx * dx + dy * dy + dz * dz);
+    }
+
+    public static float DistanceSquared(Vector3C point1, Vector3C point2) //Calcula la distancia entre 2 vectores sin hacer la raiz cuadrada
+    {
+        float dx = point2.x - point1.x;
+        float dy = point2.y - point1.y;
+        float dz = point2.z - point1.z;
+
+        return dx * dx + dy * dy + dz * dz;
     }
     #endregion
 
